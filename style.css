@@ -1,0 +1,679 @@
+/* General styles for the entire page */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif; /* Using Inter font as per instructions */
+    line-height: 1.6;
+    color: #333;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+    background-color: #f4f7f6; /* Light background color */
+}
+
+/* Navigation bar styling */
+.navbar {
+    position: fixed; /* Fixed position to stay at the top */
+    top: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.95); /* Semi-transparent background */
+    backdrop-filter: blur(10px); /* Blur effect for modern look */
+    z-index: 1000; /* Ensure navbar is on top */
+    padding: 1rem 0;
+    transition: all 0.3s ease; /* Smooth transition for scroll effect */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05); /* Subtle bottom border */
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #2c5aa0; /* Brand color for the logo */
+    letter-spacing: -0.5px;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none; /* Remove bullet points */
+    gap: 2.5rem; /* Space between nav links */
+}
+
+.nav-links a {
+    text-decoration: none; /* Remove underline */
+    color: #555;
+    font-weight: 500;
+    transition: color 0.3s ease, transform 0.3s ease; /* Smooth transition for hover */
+    cursor: pointer;
+    position: relative; /* For underline effect */
+    padding-bottom: 0.2rem;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: #2c5aa0; /* Change color on hover/active */
+    transform: translateY(-2px); /* Slight lift effect */
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #2c5aa0;
+    transition: width 0.3s ease-out;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+    width: 100%; /* Underline effect on hover/active */
+}
+
+.mobile-menu {
+    display: none; /* Hidden by default for desktop */
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px; /* Space between bars */
+    padding: 5px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.mobile-menu:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.mobile-menu span {
+    width: 30px;
+    height: 3px;
+    background: #333;
+    border-radius: 2px;
+    transition: 0.3s; /* Smooth transition for hamburger icon animation */
+}
+
+/* Hero Section Styling (Home) */
+.hero {
+    height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Gradient background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    padding: 2rem; /* Add padding for smaller screens */
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="rgba(255,255,255,0.1)" points="0,1000 1000,0 1000,1000"/></svg>');
+    background-size: cover;
+    opacity: 0.8; /* Slightly less opaque overlay */
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2; /* Ensure content is above the background pattern */
+    max-width: 900px; /* Wider content area */
+    padding: 0 2rem;
+    animation: fadeIn 1.5s ease-out forwards; /* Fade in animation for content */
+}
+
+/* Base styles for animatable hero elements (initially hidden) */
+.hero-animatable {
+    opacity: 0;
+    transform: translateY(30px);
+    /* No transition or animation here initially; it will be added by JS */
+}
+
+/* Animation class that will be added by JavaScript */
+.hero-animatable.fade-in-up-active {
+    animation: fadeInUp 1s ease forwards;
+}
+
+
+.hero h1 {
+    font-size: 4.5rem; /* Larger font size */
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.2); /* Text shadow for depth */
+}
+
+.hero p {
+    font-size: 1.6rem; /* Larger font size */
+    margin-bottom: 2.5rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero .tagline {
+    font-size: 1.2rem;
+    margin-top: 1rem;
+    font-style: italic;
+}
+
+.hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin-top: 3rem;
+}
+
+.hero-stat-item {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.hero-stat-item h4 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.hero-stat-item span {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 14px 35px;
+    background: white;
+    color: #2c5aa0;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.cta-button:hover {
+    transform: translateY(-5px) scale(1.05); /* More pronounced lift and slight scale */
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3); /* Darker shadow on hover */
+    background: #e6e6e6; /* Slightly darker background */
+}
+
+/* Sections general styling */
+.section {
+    display: none; /* Hidden by default */
+    padding: 100px 0 50px;
+    min-height: 80vh;
+    background-color: #ffffff; /* White background for sections */
+    box-shadow: 0 0 20px rgba(0,0,0,0.05); /* Subtle shadow for sections */
+    margin-bottom: 30px; /* Space between sections */
+    border-radius: 15px; /* Rounded corners for sections */
+    transition: all 0.5s ease-in-out; /* Smooth transition for section display */
+}
+
+.section.active {
+    display: block; /* Show active section */
+    animation: fadeIn 0.8s ease-in-out; /* Fade in when active */
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 3rem; /* Larger section titles */
+    margin-bottom: 3.5rem;
+    color: #2c5aa0;
+    font-weight: 700;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background-color: #667eea;
+    border-radius: 2px;
+}
+
+/* About Section */
+.about-content {
+    display: grid;
+    grid-template-columns: 1fr 2fr; /* Image on left, text on right */
+    gap: 4rem;
+    align-items: center;
+}
+
+.about-image {
+    text-align: center;
+}
+
+.profile-img {
+    width: 280px; /* Larger profile image */
+    height: 280px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 5rem; /* Larger initials */
+    font-weight: bold;
+    margin: 0 auto;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2); /* Shadow for depth */
+    border: 5px solid white; /* White border for contrast */
+}
+
+.about-text h3 {
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+    color: #2c5aa0;
+    font-weight: 600;
+}
+
+.about-text p {
+    margin-bottom: 1.8rem;
+    font-size: 1.15rem;
+    line-height: 1.9;
+    color: #444;
+}
+
+.skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem; /* Closer skill tags */
+    margin-top: 2rem;
+}
+
+.skill-tag {
+    background: #e3f2fd; /* Lighter blue for tags */
+    padding: 0.6rem 1.2rem;
+    border-radius: 25px;
+    border: 2px solid #2c5aa0;
+    color: #2c5aa0;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+}
+
+.skill-tag:hover {
+    background: #2c5aa0;
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Projects Section */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Slightly smaller min-width for more cards */
+    gap: 2.5rem; /* More space between cards */
+    margin-top: 2rem;
+}
+
+.project-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column; /* Ensure content stacks properly */
+}
+
+.project-card:hover {
+    transform: translateY(-12px); /* Lift higher on hover */
+    box-shadow: 0 25px 50px rgba(0,0,0,0.2); /* More prominent shadow */
+}
+
+.project-image {
+    height: 200px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 3.5rem;
+    border-bottom: 5px solid rgba(0,0,0,0.1); /* Separator */
+}
+
+.project-content {
+    padding: 1.8rem; /* More padding inside card */
+    flex-grow: 1; /* Allow content to take available space */
+    display: flex;
+    flex-direction: column;
+}
+
+.project-content h3 {
+    font-size: 1.8rem;
+    margin-bottom: 0.8rem;
+    color: #2c5aa0;
+    font-weight: 600;
+}
+
+.project-content p {
+    margin-bottom: 1.2rem;
+    color: #666;
+    font-size: 1rem;
+    flex-grow: 1; /* Allow description to grow */
+}
+
+.project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-bottom: 1.5rem;
+}
+
+.tech-tag {
+    background: #e3f2fd;
+    color: #1976d2;
+    padding: 0.4rem 0.9rem;
+    border-radius: 15px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.project-links {
+    display: flex;
+    gap: 1.2rem;
+    margin-top: auto; /* Push links to bottom */
+}
+
+.project-link {
+    padding: 0.6rem 1.3rem;
+    background: #2c5aa0;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.project-link:hover {
+    background: #1a4480;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Contact Section */
+.contact-content {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr; /* Contact form slightly wider */
+    gap: 5rem;
+    align-items: flex-start; /* Align content to the top */
+}
+
+.contact-info h3 {
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+    color: #2c5aa0;
+    font-weight: 600;
+}
+
+.contact-info p {
+    margin-bottom: 2rem;
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: #444;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.2rem;
+    font-size: 1.05rem;
+    color: #555;
+}
+
+.contact-item span {
+    font-weight: bold;
+    margin-right: 1.2rem;
+    color: #2c5aa0;
+    min-width: 90px; /* Consistent width for labels */
+}
+
+.contact-item a {
+    color: #2c5aa0;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.contact-item a:hover {
+    color: #1a4480;
+    text-decoration: underline;
+}
+
+.contact-form {
+    background: #f8f9fa;
+    padding: 2.5rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.form-group {
+    margin-bottom: 1.8rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.7rem;
+    color: #2c5aa0;
+    font-weight: 600;
+    font-size: 1.05rem;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid #e9ecef;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #2c5aa0;
+    box-shadow: 0 0 0 3px rgba(44, 90, 160, 0.2);
+}
+
+.submit-btn {
+    background: #2c5aa0;
+    color: white;
+    padding: 1rem 2.5rem;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    font-weight: 600;
+    width: 100%; /* Full width button */
+}
+
+.submit-btn:hover {
+    background: #1a4480;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .hero h1 {
+        font-size: 3.5rem;
+    }
+
+    .hero p {
+        font-size: 1.4rem;
+    }
+
+    .about-content {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        text-align: center;
+    }
+
+    .profile-img {
+        margin: 0 auto 2rem; /* Center and add bottom margin */
+    }
+
+    .contact-content {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+
+    .section-title {
+        font-size: 2.8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(10px);
+        flex-direction: column;
+        padding: 1rem;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        border-top: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .mobile-menu {
+        display: flex;
+    }
+
+    .hero h1 {
+        font-size: 2.8rem;
+    }
+
+    .hero p {
+        font-size: 1.2rem;
+    }
+
+    .hero .tagline {
+        font-size: 1rem;
+    }
+
+    .hero-stats {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .section-title {
+        font-size: 2.2rem;
+    }
+
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .project-card {
+        margin: 0 1rem; /* Add horizontal margin to cards */
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 1rem;
+    }
+
+    .logo {
+        font-size: 1.3rem;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    .cta-button {
+        padding: 10px 25px;
+        font-size: 1rem;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+    }
+
+    .profile-img {
+        width: 180px;
+        height: 180px;
+        font-size: 2.5rem;
+    }
+
+    .about-text h3, .contact-info h3 {
+        font-size: 1.6rem;
+    }
+
+    .about-text p, .contact-info p {
+        font-size: 1rem;
+    }
+
+    .contact-form {
+        padding: 1.5rem;
+    }
+
+    .form-group label {
+        font-size: 0.95rem;
+    }
+
+    .form-group input, .form-group textarea {
+        padding: 0.8rem;
+    }
+}
